@@ -2308,7 +2308,7 @@ end)
     end
     setupOwnNameplateListener()
 
-    local Window = Airflow:CreateWindow({Name = "Byte.Wtf", LoadingSubtitle = "Byte.WTF ON TOP", Theme = "FatalBlue", ToggleUIKeybind = "RightControl", ConfigurationSaving = {Enabled = true, FolderName = "FatalLabs", FileName = "FatalLabs"}})
+    local Window = Airflow:CreateWindow({Name = "ByteWtf", LoadingSubtitle = "Byte On Top", Theme = "FatalBlue", ToggleUIKeybind = "RightControl", ConfigurationSaving = {Enabled = true, FolderName = "FatalLabs", FileName = "FatalLabs"}})
 
     Notify = function(props) Window:Notify(props) end
 
@@ -2499,20 +2499,20 @@ end)
 
     BallTab:CreateSection("TPWalk")
     BallTab:CreateToggle({
-        Name = "Good Speed",
+        Name = "tpwalk",
         Desc = "Teleport-walk; nudges your root part each frame for a smooth glide.",
         Flag = "fatal_tpwalk", CurrentValue = s.TPWalk.Enabled,
         Callback = function(v) setTPWalk(v) end,
     })
     BallTab:CreateKeybind({
-        Name = "Good Speed keybind", Flag = "fatal_tpwalk_key",
+        Name = "tpwalk keybind", Flag = "fatal_tpwalk_key",
         CurrentValue = s.TPWalk.Keybind,
         Callback = function(key)
             if typeof(key) == "EnumItem" then s.TPWalk.Keybind = key end
         end,
     })
     BallTab:CreateSlider({
-        Name = "Turn Off Good speed", Desc = "Step distance per frame (0.001 – 0.06).",
+        Name = "tpwalk speed", Desc = "Step distance per frame (0.001 – 0.06).",
         Range = { 0.001, 0.06 }, Increment = 0.001,
         CurrentValue = s.TPWalk.Speed, Flag = "fatal_tpwalk_speed",
         Callback = function(v) s.TPWalk.Speed = v end,
@@ -2520,7 +2520,7 @@ end)
 
     buildHVHTab(HVHTab, s.HVH)
 
-    VisualsTab:CreateSection("Aimbot Colour Indicator")
+    VisualsTab:CreateSection("Aimbot Range Indicator")
     VisualsTab:CreateToggle({
         Name = "Aimbot range indicator", Flag = "fatal_ind",
         CurrentValue = s.Visuals.ShotIndicator,
@@ -2533,7 +2533,7 @@ end)
         Callback = function(v) s.Visuals.IndicatorColor = v; applyIndicatorColor() end,
     })
 
-    VisualsTab:CreateSection("Visual Goal Effect")
+    VisualsTab:CreateSection("Goal Effect")
     local function getEffectNames()
         local names = {}
         for k in pairs(Effects) do table.insert(names, k) end
@@ -2550,7 +2550,7 @@ end)
         end,
     })
     VisualsTab:CreateToggle({
-        Name = "Turn On goal effect changer", Flag = "fatal_goal",
+        Name = "Enable goal effect changer", Flag = "fatal_goal",
         CurrentValue = s.Goal.Enabled,
         Callback = function(v)
             s.Goal.Enabled = v
@@ -2602,7 +2602,7 @@ end)
         Callback = function(v) s.Visuals.HideOwnNameplate = v; applyOwnNameplate() end,
     })
     VisualsTab:CreateInput({
-        Name = "Custom username", Placeholder = "e.g. Byte",
+        Name = "Custom username", Placeholder = "e.g. Nova",
         CurrentValue = s.Visuals.CustomNameText, Flag = "fatal_np_name",
         Callback = function(text)
             s.Visuals.CustomNameText = text
@@ -2620,7 +2620,7 @@ end)
         end,
     })
     VisualsTab:CreateInput({
-        Name = "Custom title", Placeholder = "e.g. Byte Elite",
+        Name = "Custom title", Placeholder = "e.g. Nova Elite",
         CurrentValue = s.Visuals.CustomTitleText, Flag = "fatal_np_title",
         Callback = function(text)
             s.Visuals.CustomTitleText = text
@@ -2640,7 +2640,7 @@ end)
         Callback = function(v) s.Misc.Device = v; SpoofDevice() end,
     })
 
-    PrivacyTab:CreateSection("Visual Ball Changer")
+    PrivacyTab:CreateSection("Ball Changer")
     PrivacyTab:CreateDropdown({
         Name = "Select ball", Options = #BallNames > 0 and BallNames or { "None" },
         CurrentValue = s.BallChanger.SelectedBall, Flag = "fatal_ball_sel",
@@ -2651,7 +2651,7 @@ end)
         end,
     })
     PrivacyTab:CreateToggle({
-        Name = "Enable Visual ball changer", Flag = "fatal_ball",
+        Name = "Enable ball changer", Flag = "fatal_ball",
         CurrentValue = s.BallChanger.Enabled,
         Callback = function(v)
             s.BallChanger.Enabled = v
@@ -2659,11 +2659,11 @@ end)
         end,
     })
     PrivacyTab:CreateButton({
-        Name = "Reset Visual ball changer",
+        Name = "Reset ball",
         Callback = function()
             s.BallChanger.Enabled = false
-            s.BallChanger.SelectedBall = "Bron"
-            s.BallChanger.CurrentBall = "Bron"
+            s.BallChanger.SelectedBall = "ForceField"
+            s.BallChanger.CurrentBall = "ForceField"
             pcall(resetBallChanger)
         end,
     })
@@ -2800,7 +2800,7 @@ end)
 
     if isMobile then
         local ScreenGui = Instance.new("ScreenGui")
-        ScreenGui.Name = "FatalLabsMobile"
+        ScreenGui.Name = "ByteMobile"
         ScreenGui.ResetOnSpawn = false
         ScreenGui.IgnoreGuiInset = true
         ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
